@@ -210,7 +210,12 @@ def gradio_interface(image, grid_size=16, file_format="png", color_only=False):
     """
     Generates a mosaic from the uploaded image and saves it in the selected format.
     """
-    mosaic, metrics = generate_mosaic(image, grid_size, color_only)
+    # Resize the image to a manageable size
+    resized_image = resize_image(image)
+    # Pad the image to be divisible by the grid size
+    padded_image = padding(resized_image, grid_size)
+    # Generate the mosaic using the padded image
+    mosaic, metrics = generate_mosaic(padded_image, grid_size, color_only)
     if mosaic is None:
         return None, "Error: Mosaic generation failed! Check tile images.", None
 
