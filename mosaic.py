@@ -196,7 +196,7 @@ def save_selected_format(mosaic, file_format):
     return save_mosaic(mosaic, file_format)
 
 def save_mosaic(mosaic, file_format="png"):
-    save_path = f"/content/mosaic.{file_format}"
+    save_path = f"mosaic.{file_format}"  # Save in the same directory as mosaic.py
     if file_format == "jpeg":
         cv2.imwrite(save_path, cv2.cvtColor(mosaic, cv2.COLOR_RGB2BGR), [int(cv2.IMWRITE_JPEG_QUALITY), 90])
     else:
