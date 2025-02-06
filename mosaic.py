@@ -210,12 +210,7 @@ def gradio_interface(image, grid_size=16, file_format="png", color_only=False):
     """
     Generates a mosaic from the uploaded image and saves it in the selected format.
     """
-    # Resize the image to a manageable size
-    resized_image = resize_image(image)
-    # Pad the image to be divisible by the grid size
-    padded_image = padding(resized_image, grid_size)
-    # Generate the mosaic using the padded image
-    mosaic, metrics = generate_mosaic(padded_image, grid_size, color_only)
+    mosaic, metrics = generate_mosaic(image, grid_size, color_only)
     if mosaic is None:
         return None, "Error: Mosaic generation failed! Check tile images.", None
 
@@ -231,7 +226,7 @@ mosaic_face = gr.Interface(
         gr.Image(type="numpy", label="Upload an Image"),
         gr.Slider(8, 64, step=8, label="Grid Size (Tile Size)", value=16),
         gr.Radio(["png", "jpeg"], label="Download Format", value="png"),
-        gr.Checkbox(label="Color Only Mode")
+        gr.Checkbox(label="Color Only Mode")  # <-- Add this
     ],
     outputs=[
         gr.Image(type="numpy", label="Generated Mosaic"),
@@ -239,17 +234,16 @@ mosaic_face = gr.Interface(
         gr.File(label="Download Mosaic File")
     ],
     title="🎨 Interactive Image Mosaic Generator",
-    description="""📌 **How it works:**  
-    1️⃣ Upload an image 📷  
-    2️⃣ Adjust grid size (smaller = more detail) 🔳  
-    3️⃣ Choose format (PNG/JPEG) 💾  
-    4️⃣ Enable 'Color Only Mode' for a simplified version 🎨  
-    5️⃣ Download your mosaic! 🎉  
-    """,
+    description=(
+        "📌 **How it works:**\n"
+        "1️⃣ Upload an image 📷\n"
+        "2️⃣ Adjust grid size (smaller = more detail) 🔳\n"
+        "3️⃣ Choose format (PNG/JPEG) 💾\n"
+        "4️⃣ Enable 'Color Only Mode' for a simplified version 🎨\n"
+        "5️⃣ Download your mosaic! 🎉"
+    ),
     theme="compact",
 )
-
-
 
 """## Excution"""
 
