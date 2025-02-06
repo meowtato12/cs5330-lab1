@@ -175,14 +175,17 @@ def create_mosaic(image, mapped_tiles, grid_colors, grid_size=16, color_only=Fal
     return mosaic
 
 def generate_mosaic(image, grid_size=16, color_only=False):
-    tiles, tile_colors = load_tiles(TILE_DIRECTORY)  # Use correct directory
+    tiles, tile_colors = load_tiles(TILE_DIRECTORY)  # Load tile images
     if not tiles:
         return None, "Error: No tiles found in the directory!"
+
+    # Pad the image to make it divisible by grid_size
+    image = padding(image, grid_size)
 
     grid_colors = divide_image_grid(image, grid_size)
     mapped_tiles = map_tiles(grid_colors, tile_colors, tiles)
 
-    # Pass color_only to create_mosaic
+    # Create mosaic
     mosaic = create_mosaic(image, mapped_tiles, grid_colors, grid_size, color_only=color_only)
 
     # Compute similarity metrics
