@@ -234,14 +234,14 @@ mosaic_face = gr.Interface(
         gr.File(label="Download Mosaic File")
     ],
     title="🎨 Interactive Image Mosaic Generator",
-    description=(
-        "📌 **How it works:**\n"
-        "1️⃣ Upload an image 📷\n"
-        "2️⃣ Adjust grid size (smaller = more detail) 🔳\n"
-        "3️⃣ Choose format (PNG/JPEG) 💾\n"
-        "4️⃣ Enable 'Color Only Mode' for a simplified version 🎨\n"
-        "5️⃣ Download your mosaic! 🎉"
-    ),
+    description="""📌 **How it works:**  
+    1️⃣ Upload an image 📷  
+    2️⃣ Adjust grid size (smaller = more detail) 🔳  
+    3️⃣ Choose format (PNG/JPEG) 💾  
+    4️⃣ Enable 'Color Only Mode' for a simplified version 🎨  
+    5️⃣ Download your mosaic! 🎉  
+    """,
+
     theme="compact",
 )
 
